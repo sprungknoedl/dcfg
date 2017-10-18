@@ -13,7 +13,7 @@ func NewEnvProvider() *EnvProvider {
 }
 
 // Get retrieves a value from environment variables. If no
-// environment variabel is set or it is empty, ErrKeyMissing is
+// environment variable is set or it is empty, ErrKeyMissing is
 // returned
 func (p *EnvProvider) Get(key string) (string, error) {
 	str := os.Getenv(key)
