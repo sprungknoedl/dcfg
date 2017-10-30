@@ -2,6 +2,8 @@ package dcfg
 
 import (
 	"errors"
+	"fmt"
+	"log"
 	"strconv"
 )
 
@@ -78,4 +80,76 @@ func GetInt(key string) (int64, error) {
 
 	num, err := strconv.ParseInt(str, 0, 64)
 	return num, err
+}
+
+// FatalString is a wrapper arount GetString that fails with log.Fatal on error.
+func FatalString(key string) string {
+	val, err := GetString(key)
+	if err != nil {
+		log.Fatalf("get string %q: %v", key, err)
+	}
+	return val
+}
+
+// FatalBool is a wrapper arount GetBool that fails with log.Fatal on error.
+func FatalBool(key string) bool {
+	val, err := GetBool(key)
+	if err != nil {
+		log.Fatalf("get bool %q: %v", key, err)
+	}
+	return val
+}
+
+// FatalFloat is a wrapper arount GetFloat that fails with log.Fatal on error.
+func FatalFloat(key string) float64 {
+	val, err := GetFloat(key)
+	if err != nil {
+		log.Fatalf("get float %q: %v", key, err)
+	}
+	return val
+}
+
+// FatalInt is a wrapper arount GetInt that fails with log.Fatal on error.
+func FatalInt(key string) int64 {
+	val, err := GetInt(key)
+	if err != nil {
+		log.Fatalf("get int %q: %v", key, err)
+	}
+	return val
+}
+
+// MustString is a wrapper arount GetString that fails with panic on error.
+func MustString(key string) string {
+	val, err := GetString(key)
+	if err != nil {
+		panic(fmt.Errorf("get string %q: %v", key, err))
+	}
+	return val
+}
+
+// MustBool is a wrapper arount GetBool that fails with panic on error.
+func MustBool(key string) bool {
+	val, err := GetBool(key)
+	if err != nil {
+		panic(fmt.Errorf("get bool %q: %v", key, err))
+	}
+	return val
+}
+
+// MustFloat is a wrapper arount GetFloat that fails with panic on error.
+func MustFloat(key string) float64 {
+	val, err := GetFloat(key)
+	if err != nil {
+		panic(fmt.Errorf("get float %q: %v", key, err))
+	}
+	return val
+}
+
+// MustInt is a wrapper arount GetInt that fails with panic on error.
+func MustInt(key string) int64 {
+	val, err := GetInt(key)
+	if err != nil {
+		panic(fmt.Errorf("get int %q: %v", key, err))
+	}
+	return val
 }
